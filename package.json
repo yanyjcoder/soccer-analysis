@@ -1,0 +1,12 @@
+{
+  "name": "SoccerSpider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "yanyj",
+  "license": "MIT",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "mongoose": "^4.11.5",
+    "request": "^2.81.0"
+  }
+}
