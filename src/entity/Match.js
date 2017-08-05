@@ -1,9 +1,13 @@
+var util = require('../util/util');
+var mongoose = require('mongoose');
+mongoose.Promise = Promise;
+var BaseEntity = require('./BaseEntity');
 /**
  * Created by yanyj on 2017/7/31.
  */
 module.exports = (function () {
 
-    var matchSchema = new mongoose.Schema({
+    const matchSchema = new mongoose.Schema({
         matchNo: String, //赛事编号
         matchDate: String, //日期精确到日
         matchTime: Date, //日期精确的分
@@ -16,12 +20,11 @@ module.exports = (function () {
         guestTeamRank: String, //客队排名
         guestTeamNo: String, //客队编号
         homeTeamNo: String, //主队编号
-
+        tvStation: String, //可看比赛的电视台
     });
 
-    return {
-        insert: function (Matchobject) {
-
-        }
-    }
+    return util.extend(new BaseEntity(), {
+        schema: matchSchema,
+        name: 'match'
+        } )
 })();
