@@ -21,6 +21,7 @@ module.exports = (function () {
         guestTeamNo: String, //客队编号
         homeTeamNo: String, //主队编号
         tvStation: String, //可看比赛的电视台
+        letBalls: String //让球
     });
 
     return util.extend(new BaseEntity(), {

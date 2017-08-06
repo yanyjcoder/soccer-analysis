@@ -1,6 +1,8 @@
 var constant = require('../common/constant');
 var mongoose = require('mongoose');
 var config = require('../common/config');
+var schedule = require("node-schedule");
+var moment = require("moment");
 
 module.exports = {
     /**
@@ -14,7 +16,61 @@ module.exports = {
     replaceByPlaceholder: function (text, replaceStr) {
         return replaceStr.replace(constant.replaceText, text);
     },
+    /**
+     * 定时器
+     * @param {Number}type
+     * @param {{}}option
+     * @param {Function}jobFunction
+     */
+    cronJob: function (name, type,option, jobFunction) {
+        switch(type) {
+            case constant.CronType.EVERY_DAY_ONCE:
+                var rule = new schedule.RecurrenceRule();
 
+                rule.dayOfWeek = [0, new schedule.Range(1, 6)];
+
+                rule.hour = option.hour ? option.hour : 0;
+
+                rule.minute = option.minute ? option.minute : 0;
+
+                return {
+                    name : name,
+                    scheduleJob: schedule.scheduleJob(rule, function(){
+                        jobFunction.call();
+                        console.log('[' + moment().format('YYYY-MM-DD HH:mm:ss') + "] 执行任务：" + name);
+
+                    })
+                };
+            case constant.CronType.DO_ONCE:
+                var date = option.date ? option.date : new Date();
+
+                return{
+                    name : name,
+                    scheduleJob:schedule.scheduleJob(date, function(){
+
+                        jobFunction.call();
+                        console.log('[' + moment().format('YYYY-MM-DD HH:mm:ss') + "] 执行任务：" + name);
+                    })
+                };
+            default:
+                console.log('参数错误！');
+        }
+    },
+    /**
+     *  取消定时任务
+     * @param {{}}scheduleJob
+     */
+    cancelCronJob: function (scheduleJobObject) {
+
+        try{
+            scheduleJobObject.scheduleJob.cancel();
+            throw new Error('[' + scheduleJobObject.name + ']任务取消成功！')
+        } catch(e) {
+            throw new Error('定时任务取消失败！' + e)
+        }
+
+
+    },
     /**
      *
      * @param {string} string
