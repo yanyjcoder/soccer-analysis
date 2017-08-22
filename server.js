@@ -15,6 +15,6 @@ let url1 = `http://freelive.7m.cn/setFull1.aspx?encode=gb&view=simplify&match=&o
 let url21 = `http://freelive.7m.cn/live.aspx?mark=gb&TimeZone=%2B0800&wordAd=&cpageBgCol…ght=400&scoreWeight=700&goalWeight=400&fontWeight=700&DSTbox=&away=0&red=0`;
 //
 
-util.cronJob('每天爬取', 0, {hour: 14, minute: 15}, function () {
+util.cronJob('每天爬取', 0, {hour: 14, minute: 20}, function () {
     soccerSpider.getTodayMaches();
 });
