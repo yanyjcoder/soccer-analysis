@@ -30,6 +30,49 @@ module.exports = function () {
                 throw new Error('保存失败！')
             }
 
+        },
+        /**
+         * 更新
+         * @param whereStr
+         * @param updateStr
+         * @param callBack
+         */
+        update: function (whereStr, updateStr, callBack) {
+            try{
+                var _model =  util.getDBConnection().model(this.name,this.schema);
+                _model.find(whereStr,updateStr,function (error, doc) {
+                    if(error) {
+                        console.log( '更新失败!');
+                        console.log(error);
+                        return ;
+                    }
+                    callBack&&callBack.call(this);
+                    console.log('更新成功!');
+                });
+            }catch(e) {
+                throw new Error('更新失败！')
+            }
+        },
+        /**
+         * 查找
+         * @param where
+         * @param columns
+         * @param callback
+         */
+        find: function (where, columns, callback) {
+            try{
+                var _model =  util.getDBConnection().model(this.name,this.schema);
+                 _model.find(where,columns, function (error, doc) {
+                    if(error) {
+                        console.log(error);
+                        return ;
+                    }
+                    callback && callback(doc);
+                });
+
+            }catch(e) {
+                throw new Error('查询失败！')
+            }
         }
     }
 };

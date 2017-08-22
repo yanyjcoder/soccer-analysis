@@ -10,7 +10,7 @@ module.exports = (function () {
     const matchSchema = new mongoose.Schema({
         matchNo: String, //赛事编号
         matchDate: String, //日期精确到日
-        matchTime: Date, //日期精确的分
+        matchTime: String, //日期精确的分
         matchName: String, //赛事名
         homeTeamName: String, //主队名
         guestTeamName: String, //客队名
@@ -26,6 +26,6 @@ module.exports = (function () {
 
     return util.extend(new BaseEntity(), {
         schema: matchSchema,
-        name: 'match'
+        name: 'matches'
         } )
 })();
