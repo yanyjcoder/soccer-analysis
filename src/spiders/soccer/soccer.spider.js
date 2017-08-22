@@ -1,8 +1,11 @@
 /**
  * Created by yanyj on 2017/7/11.
- */
-var util = require('../../util/util');
-
+*/
+var {getPageByUrl} =  require('../../../src/request/request.own');
+var util = require('../../../src/util/util');
+var Match = require('../../../src/entity/Match');
+var moment = require('moment');
+var constant = require('../../../src/common/constant');
 var gameHistoryJson, gameTeamHistoryJson;
 
 //获取历史交锋数据
@@ -21,7 +24,7 @@ function getGameTeamHistroyJson(data) {
 function getTodayMaches() {
     getPageByUrl('http://ctc.live.7m.cn/datafile/fgb.js', function (data) {
         // var gameTeamHistoryJson = util.getObjectBySplit(data, "{")
-        var sDt=[],sDt2=[];
+        var sDt=[],sDt2=[], WLID=[];
         eval(data);
         var match ,sdt, dateArray;
         //获得比赛日期和时间
