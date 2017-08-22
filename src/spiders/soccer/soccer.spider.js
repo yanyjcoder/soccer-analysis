@@ -64,3 +64,6 @@ function getTodayMaches() {
 }
 
 
+module.exports = {
+    getTodayMaches : getTodayMaches
+};

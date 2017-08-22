@@ -82,7 +82,7 @@ module.exports = {
     },
     getDBConnection: function () {
         if(!this.DB) {
-         this.DB =  mongoose.createConnection(config.database.DB_ADDRESS_IP, config.database.DB_TEST_DATABASE_NAME);
+         this.DB =  mongoose.createConnection(config.database.DB_ADDRESS_IP, config.database.DB_REAL_DATABASE_NAME);
         }
         return this.DB;
     },
