@@ -40,7 +40,7 @@ std2[2]:  客队得分
 std2[3]:  主队红牌数
 std2[4]:  客队红牌数
 std2[5]:  时差
-std2[6]:  ？？
+std2[6]:  半场比分
 std2[7]:  ？？
 std2[8]:  比赛时间
 std2[9]:  ？？
@@ -48,3 +48,28 @@ std2[10]:  ？？
 std2[11]:  ？？
 std2[12]:  ？？
 std2[13]:  ？？
+
+
+http://data.7m.cn/Result_Data/2017-08-21/index_gb.js 查询历史的比分成绩
+####以下数组位置一一对应
+Team_A_bh_Arr  主队编号数组
+Team_B_bh_Arr  客队编号数组
+Rank_a_Arr  主队联赛排名
+Rank_b_Arr  客队联赛排名
+Team_A_Arr  主队名称
+Team_B_Arr  客队名称
+Match_bh_Arr 比赛编号数组
+Match_name_Arr 赛事名称
+meno_Arr 备注（开球信息，角球信息）
+banc_Arr 半场比分
+A_r_Arr 主队红卡数
+B_r_Arr 客队红卡数
+Start_time_Arr 赛事开始时间
+live_a_Arr 主队终场比分
+live_b_Arr 客队终场比分
+live_bh_Arr 赛事编号 (查看详细)
+panlu_Arr ？？
+pk_Arr  让球
+euro ？？
+Lk_Arr ？？
+pkl_Arr ？？

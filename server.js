@@ -1,9 +1,6 @@
 /**
  * Created by yanyj on 2017/7/11.
  */
-/**
- * Created by yanyj on 2017/7/11.
- */
 var {getPageByUrl} =  require('./src/request/request.own');
 var util = require('./src/util/util');
 var Match = require('./src/entity/Match');
@@ -13,9 +10,7 @@ let url = `http://freelive.7m.cn/live.aspx?mark=gb&TimeZone=%2B0800&wordAd=188bi
 
 let url1 = `http://freelive.7m.cn/setFull1.aspx?encode=gb&view=simplify&match=&ordType=&speakall=0`;
 let url21 = `http://freelive.7m.cn/live.aspx?mark=gb&TimeZone=%2B0800&wordAd=&cpageBgCol…ght=400&scoreWeight=700&goalWeight=400&fontWeight=700&DSTbox=&away=0&red=0`;
-//
-
-util.cronJob('每天爬取', 0, {hour: 15, minute: 0}, function () {
-    soccerSpider.getTodayMaches();
+//每天12点10爬取当前到明天12点的数据
+util.cronJob('每天爬取', 0, {hour: 12, minute: 10}, function () {
+    soccerSpider.getTodayMatches();
 });
-// soccerSpider.getTodayMaches();

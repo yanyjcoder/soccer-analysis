@@ -5,12 +5,19 @@ module.exports = function () {
     return {
         schema: null,
         name: '',
-        /**
-         * 保存
-         * @param {{}} object
-         * @param {boolean} endFag
-         */
-        save: function (object, endFag) {
+        saveMany: function (docs, callback) {
+            try{
+                var _model =  util.getDBConnection().model(this.name,this.schema);
+                _model.insertMany(docs,{ordered: false}).then(function(r) {
+                    callback();
+                }, function (e) {
+                    callback();
+                });
+            }catch (e) {
+
+            }
+        },
+        _save: function (object, endFag, endlog) {
             try{
                 var _model =  util.getDBConnection().model(this.name,this.schema);
                 new _model(object).save(function (error, doc) {
@@ -20,16 +27,25 @@ module.exports = function () {
                         return ;
                     }
 
-                    console.log(object.matchNo + ': 保存成功!');
+                    console.log(object.matchNo + ': 保存成功!' );
                 });
 
                 if(endFag) {
                     console.log('***************************************保存结束*****************************');
+                    endlog && console.log(endlog);
                 }
             }catch(e) {
                 throw new Error('保存失败！')
             }
 
+        },
+        /**
+         * 保存
+         * @param {{}} object
+         * @param {boolean} endFag
+         */
+        save: function (object, endFag) {
+           this._save(object, endFag);
         },
         /**
          * 更新

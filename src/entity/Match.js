@@ -8,9 +8,9 @@ var BaseEntity = require('./BaseEntity');
 module.exports = (function () {
 
     const matchSchema = new mongoose.Schema({
-        matchNo: String, //赛事编号
-        matchDate: String, //日期精确到日
-        matchTime: String, //日期精确的分
+        matchNo: { type: [String], index: true,unique:true }, //赛事编号
+        matchDate: { type: [String], index: true }, //日期精确到日
+        matchTime: { type: [String], index: true }, //日期精确到分 unique:true
         matchName: String, //赛事名
         homeTeamName: String, //主队名
         guestTeamName: String, //客队名
@@ -21,11 +21,30 @@ module.exports = (function () {
         guestTeamNo: String, //客队编号
         homeTeamNo: String, //主队编号
         tvStation: String, //可看比赛的电视台
-        letBalls: String //让球
+        letBalls: String, //让球
+        extra: String, //额外信息(开球，角球)
+        homeHalfSoccer: Number, //主队半场球
+        guestHalfSoccer: Number, //客队半场球
+        guestSoccer: Number, //客队终场球
+        homeSoccer: Number, //主队终场球
+        homeRedNumber: Number, //主队红卡
+        guestRedNumber: Number, //客队红卡
+        matchStatus: String, //比赛状态 （0：）
     });
-
-    return util.extend(new BaseEntity(), {
+    
+    let _match = util.extend(new BaseEntity(), {
         schema: matchSchema,
         name: 'matches'
-        } )
+    } );
+    _match.save = function (entity, endFlag, endLog) {
+        _match.find({matchNo:entity.matchNo}, null, function (doc) {
+            if(!doc || doc.length === 0) {
+                _match._save(entity, endFlag, endLog);
+            } else {
+                console.log('[' + entity.matchNo + '] 已存在！')
+            }
+        })
+    };
+    
+    return _match;
 })();
