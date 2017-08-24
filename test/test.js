@@ -3,4 +3,4 @@
  */
 var soccerSpider = require('../src/spiders/soccer/soccer.spider');
 
-soccerSpider.getHistoryMatches(1, 3650, []);
+soccerSpider.getHistoryMatches(1, 1830, []);

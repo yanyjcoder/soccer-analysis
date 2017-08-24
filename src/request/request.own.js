@@ -27,6 +27,8 @@ function getPageByUrl(url, callback) {
         res.on('data', (chunk) =>{
             htmlStr += chunk;
         });
+        res.on('error', createHangUpError());
+
 
         //监听end事件
         res.on('end', () => {
@@ -35,6 +37,12 @@ function getPageByUrl(url, callback) {
     })
 }
 
+
+function createHangUpError() {
+    var error = new Error('socket hang up');
+    error.code = 'ECONNRESET';
+    return error;
+}
 
 module.exports = {
     getPageByUrl: getPageByUrl
