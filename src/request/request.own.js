@@ -27,7 +27,7 @@ function getPageByUrl(url, callback) {
         res.on('data', (chunk) =>{
             htmlStr += chunk;
         });
-        res.on('error', createHangUpError());
+        res.on('error', createHangUpError);
 
 
         //监听end事件
