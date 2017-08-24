@@ -4,6 +4,7 @@ var config = require('../common/config');
 var schedule = require("node-schedule");
 var moment = require("moment");
 
+mongoose.connect('mongodb://' + config.database.DB_ADDRESS_IP + ':' + config.database.DB_ADDRESS_PORT + '/' + config.database.DB_REAL_DATABASE_NAME, {useMongoClient:true});
 module.exports = {
     /**
      *
@@ -12,7 +13,7 @@ module.exports = {
      * @return {void|XML|string|*}
      */
 
-    DB: null,
+    DB: mongoose.connection,
     replaceByPlaceholder: function (text, replaceStr) {
         return replaceStr.replace(constant.replaceText, text);
     },
@@ -82,7 +83,8 @@ module.exports = {
     },
     getDBConnection: function () {
         if(!this.DB) {
-         this.DB =  mongoose.createConnection(config.database.DB_ADDRESS_IP, config.database.DB_REAL_DATABASE_NAME);
+            mongoose.connect(config.database.DB_ADDRESS_IP + ':' + config.database.DB_ADDRESS_PORT + '/' + config.database.DB_REAL_DATABASE_NAME, {useMongoClient:true});
+         this.DB =  mongoose.connection;
          // this.DB =  mongoose.createConnection(config.database.DB_ADDRESS_IP, config.database.DB_TEST_DATABASE_NAME);
         }
         return this.DB;
